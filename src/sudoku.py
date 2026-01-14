@@ -35,18 +35,11 @@ class Sudoku:
     def __repr__(self) -> str:
         output = ""
         for row_index, row in enumerate(self.board):
-            output+= "\n"
-            if row_index % 3 == 0:
-                output += "-"*21
-                output+= "\n"
-            output += "-"*21
             output += "\n"
-            for column_index, field in enumerate(row):
-                if column_index % 3 == 0:
-                    output += "|"
-                output += str(field) if field is not None else " "
-                output += "|"
-        output+= "\n"
-        output += "-"*21
-        output += "\n"
+            for el_index, el in enumerate(row):
+                output += (str(el) + " ") if el else ". "
+                if (el_index % 3 == 2):
+                    output += "  "
+            if (row_index % 3 == 2):
+                output += "\n"
         return output
