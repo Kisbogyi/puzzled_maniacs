@@ -1,6 +1,7 @@
 from z3 import ArithRef,Solver,Int,Distinct,And,Or,sat
 from our_sudoku import OurSudoku
 from our_solver import solve
+## uv pip install py-sudoku
 from sudoku import Sudoku
 
 board = [
@@ -98,7 +99,10 @@ if result2 == sat:
     print("Sudoku does NOT have a unique solution.")
 else:
     print("Sudoku has a UNIQUE solution.")
+### end AI SLOP
 
+
+## this only works for traditional sudokus, which is fine:P
 official_pysudoku = Sudoku(3,3,board)
 print(official_pysudoku.get_difficulty())
 
