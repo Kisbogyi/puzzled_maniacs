@@ -1,8 +1,8 @@
 from z3 import ArithRef,Solver,Int,Distinct,And,Or,sat
-from sudoku import Sudoku
+from our_sudoku import OurSudoku
 from solver import solve
 
-sudoku: Sudoku = Sudoku([
+sudoku: OurSudoku = OurSudoku([
         [9,8,7,4,3,5,6,1,2],
         [2,5,1,7,6,9,8,3,4],
         [6,4,3,1,8,2,5,7,9],

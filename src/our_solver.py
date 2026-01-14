@@ -1,8 +1,8 @@
 from z3 import ArithRef, Solver, Int, Distinct, And
-from sudoku import Sudoku
+from our_sudoku import OurSudoku
 
 
-def solve(sudoku: Sudoku):
+def solve(sudoku: OurSudoku):
     """Solve the sudoku
 
     The function solves the sudoku with z3-solver, then returns a new sudoku
@@ -53,7 +53,7 @@ def solve(sudoku: Sudoku):
     model = s.model()
 
     # copy the values of the solved sudoku to the object
-    solved_sudoku = Sudoku()
+    solved_sudoku = OurSudoku()
     for x, row in enumerate(matrix):
         for y, field in enumerate(row):
             value = model.eval(field).as_long()
