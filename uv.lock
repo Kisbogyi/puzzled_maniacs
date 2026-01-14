@@ -3,28 +3,15 @@ revision = 3
 requires-python = ">=3.12"
 
 [[package]]
-name = "py-sudoku"
-version = "2.0.0"
-source = { registry = "https://pypi.org/simple" }
-sdist = { url = "https://files.pythonhosted.org/packages/02/ca/15117ec84458cc340666a18f86ab73c740a97030d11758baeda475fa084c/py_sudoku-2.0.0.tar.gz", hash = "sha256:7cc9bb0dd0f2fbcd10031fea69f3a3a10f1e08a28f6571548f555c99654c9a2b", size = 8881, upload-time = "2024-10-15T18:36:40.965Z" }
-wheels = [
-    { url = "https://files.pythonhosted.org/packages/23/02/5f08d89c1531e8e08305e0719a186f083734bcbcf724ccf0ee0ca7c4693c/py_sudoku-2.0.0-py3-none-any.whl", hash = "sha256:c41ff4bdfa69ee6f1950884a7473e38f9464bd300742916b2bea1a16b4c5f9d9", size = 9721, upload-time = "2024-10-15T18:36:39.109Z" },
-]
-
-[[package]]
 name = "sudoku"
 version = "0.1.0"
 source = { virtual = "." }
 dependencies = [
-    { name = "py-sudoku" },
     { name = "z3-solver" },
 ]
 
 [package.metadata]
-requires-dist = [
-    { name = "py-sudoku", specifier = ">=2.0.0" },
-    { name = "z3-solver", specifier = ">=4.15.4.0" },
-]
+requires-dist = [{ name = "z3-solver", specifier = ">=4.15.4.0" }]
 
 [[package]]
 name = "z3-solver"

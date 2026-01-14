@@ -40,3 +40,5 @@ I will start with the very basic naive impelemtation:
 - rinse and repeat
 
 If a backtracking solution was used, it could lookahead restore the "state" at which the sudoku was last unique.
+
+The official py-sudoku package actually uses the number of empty squares as the indicator of difficulty. So 0.4 difficulty means 40% empty squares, 0.55 means 55% empty squares. If they can do it, why can't we? https://pypi.org/project/py-sudoku/
