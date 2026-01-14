@@ -1,8 +1,9 @@
 from z3 import ArithRef,Solver,Int,Distinct,And,Or,sat
 from our_sudoku import OurSudoku
-from solver import solve
+from our_solver import solve
+from sudoku import Sudoku
 
-sudoku: OurSudoku = OurSudoku([
+board = [
         [9,8,7,4,3,5,6,1,2],
         [2,5,1,7,6,9,8,3,4],
         [6,4,3,1,8,2,5,7,9],
@@ -11,9 +12,12 @@ sudoku: OurSudoku = OurSudoku([
         [4,1,2,6,5,7,3,9,8],
         [1,9,4,5,7,8,2,6,3],
         ### replace the following line with Nones to get a non-unique sudoku
-        [5,2,8,3,9,6,1,4,7],
+        #[5,2,8,3,9,6,1,4,7],
         9*[None],
-    ])
+        9*[None],
+    ]
+
+sudoku: OurSudoku = OurSudoku(board=board)
 """
 9 8 7   4 3 5   6 1 2   
 2 5 1   7 6 9   8 3 4   
@@ -95,6 +99,8 @@ if result2 == sat:
 else:
     print("Sudoku has a UNIQUE solution.")
 
+official_pysudoku = Sudoku(3,3,board)
+print(official_pysudoku.get_difficulty())
 
 ## a more "efficient" solution might be to check values by hand
 ## but then again,Z3 runs on a low level
