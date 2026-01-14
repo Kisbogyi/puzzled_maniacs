@@ -7,7 +7,8 @@ class Sudoku:
     """
     # I don't use [[None]*9]*9 because it will soft copy the [None]*9 
     # so if something changes it will change in all
-    board: list[list[int | None]] = [[None] * 9 for _ in range(9)]
+    def __init__(self, board: list[list[int | None]] = [[None] * 9 for _ in range(9)]):
+        self.board = board
 
     def set_field(self, x: int, y: int, value: int|None) -> None:
         """ Sets the field with the specific value

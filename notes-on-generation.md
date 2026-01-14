@@ -22,7 +22,8 @@ Once again, the first naive-but-simple way:
 - some cells can only have one unique value due to naive constraints. Those cells can be removed.
 - randomly choosing a cell to remove and checks for uniqueness.
 
-Promotion-heavy material on sudoku difficulty rankings explained in human language https://sudoku.coach/en/learn/sudoku-difficulty. From that article, the main points to use for this project wrt difficulty level:
+## Sudoku difficulty ranking
+Promotion-heavy material on sudoku difficulty rankings explained in human language https://sudoku.coach/en/learn/sudoku-difficulty. From that article, the main points to use for this project w.r.t. difficulty level:
 Difficulty can be expressed in two general ways: difficulty (eg. SE rating) and work (eg. HoDoKu rating). SE rating is essentially $\max (difficulty_i)$, HoDoKu is more akin to $\Sigma_i^n difficulty_i$. It's "complexity" vs "time spent".
 
 Hodoku can be downloaded from the website https://hodoku.sourceforge.net/en/docs_cre.php (link directs to docs, has .jar Download).
