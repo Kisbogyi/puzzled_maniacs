@@ -1,4 +1,4 @@
-class OurSudoku:
+class Sudoku:
     """ Sudoku game class
     
     Attributes:

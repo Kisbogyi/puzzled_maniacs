@@ -1,9 +1,9 @@
-from sudoku import OurSudoku
+from sudoku import Sudoku
 from solver import solve
 
 
 def main():
-    sudoku = OurSudoku()
+    sudoku = Sudoku()
     sudoku.set_field(0,1, 9)
     print(sudoku)
     solved_sudoku = solve(sudoku)

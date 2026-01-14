@@ -1,5 +1,5 @@
 from z3 import ArithRef,Solver,Int,Distinct,And,Or,sat
-from sudoku import OurSudoku
+from sudoku import Sudoku
 from solver import solve
 import random, copy
 
@@ -17,7 +17,7 @@ board = [
         9*[None],
     ]
 
-sudoku: OurSudoku = OurSudoku(board=board)
+sudoku: Sudoku = Sudoku(board=board)
 """
 9 8 7   4 3 5   6 1 2   
 2 5 1   7 6 9   8 3 4   
@@ -85,7 +85,7 @@ def is_unique(board):
     s2.add(Or(diff))
     return s2.check() != sat   # UNIQUE iff no second solution exists
 
-def remove_a_cell(puzzle: OurSudoku):
+def remove_a_cell(puzzle: Sudoku):
     assert is_unique(puzzle.board)
     # Collect all filled cells
     filled_cells = [(r, c) for r in range(9) for c in range(9)
