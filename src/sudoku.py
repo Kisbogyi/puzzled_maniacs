@@ -1,5 +1,5 @@
-class Sodoku:
-    """ Sodoku game class
+class Sudoku:
+    """ Sudoku game class
     
     Attributes:
         board: a matrix that stores the game state a field is int if it stores a value,

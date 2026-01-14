@@ -1,18 +1,18 @@
 from z3 import ArithRef, Solver, Int, Distinct, And
-from sodoku import Sodoku
+from sudoku import Sudoku
 
 
-def solve(sodoku: Sodoku):
-    """Solve the sodoku
+def solve(sudoku: Sudoku):
+    """Solve the sudoku
 
-    The function solves the sodoku with z3-solver, then returns a new Sodoku
-        object as the solved sodoku
+    The function solves the sudoku with z3-solver, then returns a new sudoku
+        object as the solved sudoku
 
     Args:
-        sodoku: The sodoku that is needs to be solved
+        sudoku: The sudoku that is needs to be solved
 
     Returns:
-        A solved sodoku
+        A solved sudoku
     """
     matrix: list[list[ArithRef]] = [
         [Int(f"{x}{y}") for x in range(9)] for y in range(9)
@@ -20,7 +20,7 @@ def solve(sodoku: Sodoku):
     s = Solver()
 
     # copy all values from board to the solver's possible values
-    for x, row in enumerate(sodoku.board):
+    for x, row in enumerate(sudoku.board):
         for y, field in enumerate(row):
             if field is not None:
                 # don't use matrix[x][y] = field it will be bad if you try to
@@ -52,11 +52,11 @@ def solve(sodoku: Sodoku):
     s.check()
     model = s.model()
 
-    # copy the values of the solved sodoku to the object
-    solved_sodoku = Sodoku()
+    # copy the values of the solved sudoku to the object
+    solved_sudoku = Sudoku()
     for x, row in enumerate(matrix):
         for y, field in enumerate(row):
             value = model.eval(field).as_long()
-            solved_sodoku.set_field(x, y, value)
+            solved_sudoku.set_field(x, y, value)
 
-    return solved_sodoku
+    return solved_sudoku

@@ -1,13 +1,13 @@
-from sodoku import Sodoku
+from sudoku import Sudoku
 from solver import solve
 
 
 def main():
-    sodoku = Sodoku()
-    sodoku.set_field(0,1, 9)
-    print(sodoku)
-    solved_sodoku = solve(sodoku)
-    print(solved_sodoku)
+    sudoku = Sudoku()
+    sudoku.set_field(0,1, 9)
+    print(sudoku)
+    solved_sudoku = solve(sudoku)
+    print(solved_sudoku)
 
 
 if __name__ == "__main__":
