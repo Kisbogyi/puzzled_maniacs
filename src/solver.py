@@ -1,5 +1,5 @@
 from z3 import ArithRef, Solver, Int, Distinct, And
-from our_sudoku import OurSudoku
+from sudoku import OurSudoku
 
 
 def solve(sudoku: OurSudoku):

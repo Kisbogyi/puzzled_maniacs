@@ -1,5 +1,5 @@
-from our_sudoku import OurSudoku
-from our_solver import solve
+from sudoku import OurSudoku
+from solver import solve
 
 
 def main():
