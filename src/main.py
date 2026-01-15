@@ -10,6 +10,5 @@ def main():
     solved_sudoku = ssolver.solve(sudoku, SudokuType.Windoku)
     print(solved_sudoku)
 
-
 if __name__ == "__main__":
     main()

@@ -1,7 +1,6 @@
-from z3 import ArithRef, Solver, Int, Distinct, And, Or, sat
+from z3 import ArithRef, Solver, Int, Distinct, And
 from sudoku import Sudoku
 from enum import Enum
-
 
 class SudokuType(Enum):
     Classic = 1
