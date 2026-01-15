@@ -1,6 +1,6 @@
 from z3 import ArithRef,Solver,Int,Distinct,And,Or,sat
 from sudoku import Sudoku
-from solver import solve
+from solver import SudokuSolver
 import random, copy
 
 board = [
