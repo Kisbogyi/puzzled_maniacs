@@ -10,14 +10,24 @@ class SudokuType(Enum):
     Center = 5
 
 class SudokuSolver:
-    def __init__(self):
+    ## added stype here as argument so that it wouldn't have to be passed around
+    def __init__(self, stype: SudokuType = SudokuType.Classic):
+        self.type = stype
+
         ## this is a Z3 solver, not to be confused with a sudoku solver!
         self.s = Solver()
         self.matrix: list[list[ArithRef]] = [
             [Int(f"{x}{y}") for x in range(9)] for y in range(9)
         ]
         self.default_constraints()
-        
+        self.apply_type_constraints()
+    
+    # SLOP WARNING
+    ## Return a new solver with the same SudokuType but fresh constraints
+    def clone_blank(self) -> "SudokuSolver":
+        return SudokuSolver(self.type)
+    # END SLOP
+
     def default_constraints(self) -> None:
         # distinct numbers in every row from 1 to 9
         for i in range(9):
@@ -90,8 +100,8 @@ class SudokuSolver:
 
     # SLOP WARNING
     # Helper so we can reuse type constraints outside solve()
-    def apply_type_constraints(self, type: "SudokuType") -> None:
-        match type:
+    def apply_type_constraints(self) -> None:
+        match self.type:
             case SudokuType.Center:
                 self.center_constraints()
             case SudokuType.Nonconsecutive:
@@ -104,7 +114,7 @@ class SudokuSolver:
                 pass
     # SLOP END
 
-    def solve(self, sudoku: Sudoku, type: SudokuType):
+    def solve(self, sudoku: Sudoku):
         """Solve the sudoku
 
         The function solves the sudoku with z3-solver, then returns a new Sudoku
@@ -117,7 +127,7 @@ class SudokuSolver:
             A solved sudoku
         """
         self.known_value_constraints(sudoku)
-        self.apply_type_constraints(type)
+        self.apply_type_constraints()
 
         # TODO: apply the check weather it is solvable
         print("="*10)
