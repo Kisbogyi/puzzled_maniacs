@@ -57,10 +57,10 @@ class Generator:
                 return sudoku
         return None
 
-    def removal_generator(self, sudoku, target, stype=SudokuType.Classic, symmetry=None, random_seed=None):
-        if random_seed is not None:
-            random.seed(random_seed)
 
+    def removal_generator(self, sudoku, target, stype=SudokuType.Classic, symmetry=None, rng=None):
+        if rng is None:
+            rng = random.Random()
         work = Sudoku(board=[row[:] for row in sudoku.board])
         solved = SudokuSolver().solve(work, stype)
         if solved is not None:
@@ -71,7 +71,6 @@ class Generator:
                 for rc in cells:
                     yield [rc]
                 return
-
             seen = set()
             for (r, c) in cells:
                 if (r, c) in seen:
@@ -83,7 +82,6 @@ class Generator:
                     group.add((8 - r, c))
                 elif symmetry == "vertical":
                     group.add((r, 8 - c))
-
                 group = {(gr, gc) for (gr, gc) in group if 0 <= gr < 9 and 0 <= gc < 9}
                 for g in group:
                     seen.add(g)
@@ -93,30 +91,24 @@ class Generator:
             current_clues = count_clues(work.board)
             if current_clues <= target:
                 break
-
             filled = work.get_nonempty_cells()
-            random.shuffle(filled)
-
+            rng.shuffle(filled)
             removed_this_round = False
             for to_remove in symmetric_pairs(filled):
                 if any(work.board[r][c] is None for (r, c) in to_remove):
                     continue
                 if current_clues - len(to_remove) < target:
                     continue
-
                 trial = [row[:] for row in work.board]
                 for (r, c) in to_remove:
                     trial[r][c] = None
-
                 if self.solves_uniquely(trial, stype):
                     work.board = trial
                     removed_this_round = True
                     yield Sudoku(board=[row[:] for row in work.board])
                     break
-
             if not removed_this_round:
                 break
-
         return work
 
 if __name__ == "__main__":
@@ -135,12 +127,14 @@ if __name__ == "__main__":
     base = Sudoku(initial_board)
     gen = Generator(base)
 
+    rng = random.Random(None)
+    #rng = random.Random(42)
     start, end = DIFFICULTY_CLUE_RANGES[Difficulty.MEDIUM]
-    target_value = random.randint(start, end)
+    target_value = rng.randint(start, end)
     final = None
-    for puzzle in gen.removal_generator(base, target=target_value, stype=SudokuType.Classic, random_seed=42):
-        print(puzzle)
-        print("Clues:", count_clues(puzzle.board), "Empty ratio:", puzzle.get_difficulty_rating())
+    for puzzle in gen.removal_generator(base, target=target_value, stype=SudokuType.Classic, rng=rng):
+        #print(puzzle)
+        #print("Clues:", count_clues(puzzle.board), "Empty ratio:", puzzle.get_difficulty_rating())
         final = puzzle
 
     print("Final puzzle:")
