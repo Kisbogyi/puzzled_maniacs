@@ -1,4 +1,4 @@
-from z3 import ArithRef, Solver, Int, Distinct, And
+from z3 import ArithRef, Solver, Int, Distinct, And, Or, sat
 from sudoku import Sudoku
 from enum import Enum
 
@@ -12,11 +12,12 @@ class SudokuType(Enum):
 
 class SudokuSolver:
     def __init__(self):
-        ## this is a Z3 solver, not a sudoku solver!
+        ## this is a Z3 solver, not to be confused with a sudoku solver!
         self.s = Solver()
         self.matrix: list[list[ArithRef]] = [
             [Int(f"{x}{y}") for x in range(9)] for y in range(9)
         ]
+        self.default_constraints()
         
     def default_constraints(self) -> None:
         # distinct numbers in every row from 1 to 9
@@ -39,7 +40,6 @@ class SudokuSolver:
                         [self.matrix[i * 3 + x][j * 3 + y] for x in range(3) for y in range(3)]
                     )
                 )
-
 
     def known_value_constraints(self, sudoku: Sudoku) -> None:
         # copy all values from board to the solver's possible values
@@ -88,7 +88,22 @@ class SudokuSolver:
         for i in range(2):
             for j in range(2):
                 self.s.add(Distinct([self.matrix[i*4+x+1][j*4+y+1] for x in range(3) for y in range(3)]))
-        
+
+    # SLOP WARNING
+    # Helper so we can reuse type constraints outside solve()
+    def apply_type_constraints(self, type: "SudokuType") -> None:
+        match type:
+            case SudokuType.Center:
+                self.center_constraints()
+            case SudokuType.Nonconsecutive:
+                self.non_consecutive_constraints()
+            case SudokuType.AntiKnight:
+                self.knight_constraints()
+            case SudokuType.Windoku:
+                self.windoku_constraints()
+            case _:
+                pass
+    # SLOP END
 
     def solve(self, sudoku: Sudoku, type: SudokuType):
         """Solve the sudoku
@@ -102,19 +117,8 @@ class SudokuSolver:
         Returns:
             A solved sudoku
         """
-        # default rules for sudoku
-        self.default_constraints()
         self.known_value_constraints(sudoku)
-
-        match type:
-            case SudokuType.Center:
-                self.center_constraints()
-            case SudokuType.Nonconsecutive:
-                self.non_consecutive_constraints()
-            case SudokuType.AntiKnight:
-                self.knight_constraints()
-            case SudokuType.Windoku:
-                self.windoku_constraints()
+        self.apply_type_constraints(type)
 
         # TODO: apply the check weather it is solvable
         print("="*10)

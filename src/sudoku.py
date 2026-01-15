@@ -34,6 +34,19 @@ class Sudoku:
                 f"Value: {value} is too large or too small it should be [1-9]"
             )
         self.board[x][y] = value
+    
+    def get_nonempty_cells(self):
+        filled_cells = [(r, c) for r in range(9) for c in range(9)
+            if self.board[r][c] is not None]
+        return filled_cells
+
+    # Outputs a basic difficulty rating based on the percentage of empty cells
+    # Higher = more empty = more difficult
+    def get_difficulty_rating(self) -> float:
+        nonempty = len(self.get_nonempty_cells())
+        empty_ratio = 1.0 - (nonempty / 81.0)
+        return round(empty_ratio, 4)
+
 
     # Writes a BAD ascii art of the board state
     def __repr__(self) -> str:
