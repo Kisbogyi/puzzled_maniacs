@@ -15,7 +15,7 @@ DIFFICULTY_CLUE_RANGES = {
     Difficulty.EASY:   (38, 49),
     Difficulty.MEDIUM: (32, 37),
     Difficulty.HARD:   (26, 31),
-    Difficulty.EXPERT: (13, 25)
+    Difficulty.EXPERT: (9, 25)
 }
 
 def count_clues(board):
