@@ -1,6 +1,9 @@
+from typing import Optional
+
+
 class Sudoku:
-    """ Sudoku game class
-    
+    """Sudoku game class
+
     Attributes:
         board: a matrix that stores the game state a field is int if it stores a value,
             if the field is empty then it is None
