@@ -50,11 +50,12 @@ class Sudoku:
 
     # Writes a BAD ascii art of the board state
     def __repr__(self) -> str:
+        print("THIS IS THE COPYABLE FORMAT")
         output = ""
         for row_index, row in enumerate(self.board):
             output += "\n"
             for el_index, el in enumerate(row):
-                output += (str(el) + " ") if el else ". "
+                output += (str(el) + " ") if el else " "
 #                if (el_index % 3 == 2):
 #                    output += "  "
 #           if (row_index % 3 == 2):
