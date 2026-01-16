@@ -55,8 +55,8 @@ class Sudoku:
             output += "\n"
             for el_index, el in enumerate(row):
                 output += (str(el) + " ") if el else ". "
-                if (el_index % 3 == 2):
-                    output += "  "
-            if (row_index % 3 == 2):
-                output += "\n"
+#                if (el_index % 3 == 2):
+#                    output += "  "
+#           if (row_index % 3 == 2):
+#                output += "\n"
         return output

@@ -12,7 +12,7 @@ def main():
     
     sudoku_gen = Generator(ssolver, rng=None)
     
-    difficulty = Difficulty.EXPERT
+    difficulty = Difficulty.MEDIUM
     symmetry = None  # "diagonal", "horizontal", "vertical", None
     final, target_value = sudoku_gen.generate(solved_sudoku, difficulty=difficulty, symmetry=symmetry)
     print("Final puzzle:")
