@@ -21,6 +21,7 @@ def main():
     print("Final puzzle:")
     print(final)
     print(f"Type: {sudoku_type}")
+    print(f"Difficulty: {difficulty}")
     print("Target clues:", target_value)
     print("Final clues:", count_clues(final.board) if final else None)
 
