@@ -61,3 +61,7 @@ class Sudoku:
 #           if (row_index % 3 == 2):
 #                output += "\n"
         return output
+
+    def csv_format(self) -> list[str]:
+        return [str(field) if field is not None else " " for row in self.board for field in row]
+
