@@ -2,13 +2,12 @@
 #set text(font: "IBM Plex Serif")
 #show heading: set text(font: "Metal Mania", size: 24pt)
 #show heading: set align(center) 
-#show heading: set block(below: 2em)
-
+#show heading: set block(below: 1em)
 
 
 #let default = 0.5pt
-#let thick = 1pt
-#let border = 1.5pt
+#let thick = 1.2pt
+#let border = 2pt
 
 #let results = csv("sudoku.csv")
 #let sudokus = results.map(data => [
@@ -73,7 +72,7 @@
 #grid(
   columns: (1fr, 1fr),
   rows: (auto, auto),
-  row-gutter: 1cm,
+  row-gutter: 2cm,
   align: center,
   ..sudokus
 )
