@@ -12,10 +12,19 @@
 #let results = csv("sudoku.csv")
 #let sudokus = results.map(data => [
 = KRAZY SUDOKU
+#let type = read("sudoku.csv.typefile")
 #table(
   align: center,
   rows: (0.6cm),
   columns: (0.6cm,0.6cm,0.6cm,0.6cm,0.6cm,0.6cm,0.6cm,0.6cm,0.6cm),
+  fill: (x, y) => {
+    if type.contains("Windoku") {
+      // topleft
+      if (x > 0 and y > 0 and x < 4 and y < 4) or (x > 4 and y > 0 and x < 8 and y < 4) or (x > 0 and y > 4 and x < 4 and y < 8) or (x > 4 and y > 4 and x < 8 and y < 8) { luma(211) }
+    } else if type.contains("Center") {
+      if calc.rem(x, 3) == 1 and calc.rem(y, 3) == 1 { luma(211) }
+    } else { white }
+  },
   stroke: (x, y) => {
     if (y == 0 ) {(
       top: border,
@@ -41,7 +50,6 @@
   ..data
 )
 
-#let type = read("sudoku.csv.typefile")
 *Type*:
 #if type.contains("Classic") {[
   Classic
@@ -72,7 +80,8 @@
 #grid(
   columns: (1fr, 1fr),
   rows: (auto, auto),
-  row-gutter: 2cm,
+  gutter: 4cm,
+  row-gutter: 4cm,
   align: center,
   ..sudokus
 )
