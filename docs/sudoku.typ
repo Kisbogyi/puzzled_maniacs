@@ -81,7 +81,7 @@
   columns: (1fr, 1fr),
   rows: (auto, auto),
   gutter: 4cm,
-  row-gutter: 4cm,
+  row-gutter: 3cm,
   align: center,
   ..sudokus
 )

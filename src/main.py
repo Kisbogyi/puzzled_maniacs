@@ -8,9 +8,9 @@ from utils import write_csv_sudoku
 def main():
     ### DEFINE TYPE, DIFFICULTY AND SYMMETRY HERE
     ## Classic, AntiKnight, Windoku, Nonconsecutive, Center
-    sudoku_type = SudokuType.Center
+    sudoku_type = SudokuType.Classic
     ssolver = SudokuSolver(sudoku_type)
-    difficulty = Difficulty.EASY
+    difficulty = Difficulty.MEDIUM
     symmetry = None  # "diagonal", "horizontal", "vertical", None
 
     sudoku = Sudoku()
