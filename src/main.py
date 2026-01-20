@@ -4,14 +4,47 @@ from sudoku import Sudoku
 from solver import SudokuSolver, SudokuType
 from generator import Generator, Difficulty, count_clues
 from utils import write_csv_sudoku
+from argparse import ArgumentParser
+
+parser = ArgumentParser(
+        description='Script for generating solvable sudokus and sudoku variants.'
+        )
+
+parser.add_argument('sudoku_type', type=str, help='type of sudoku, options are Classic, AntiKnight, Windoku, Nonconsecutive, and Center')
+parser.add_argument('difficulty', type=str, help='sudoku difficulty, can be easy, medium, hard, or expert')
+parser.add_argument('-s', '--symmetry', type=str, help='options are diagonal, horisontal, and vertical')
+
+sudoku_types = {
+        'classic': SudokuType.Classic,
+        'antiknight': SudokuType.AntiKnight,
+        'windoku': SudokuType.Windoku,
+        'nonconsecutive': SudokuType.Nonconsecutive,
+        'center': SudokuType.Center
+        }
+
+difficulties = {
+        'easy': Difficulty.EASY,
+        'medium': Difficulty.MEDIUM,
+        'hard': Difficulty.HARD,
+        'expert': Difficulty.EXPERT
+        }
 
 def main():
+    args = parser.parse_args()
+
+    sudoku_type = sudoku_types[args.sudoku_type.lower()]
+    ssolver = SudokuSolver(sudoku_type)
+    difficulty = difficulties[args.difficulty.lower()]
+    symmetry = args.symmetry.lower() if args.symmetry else None
+
+    '''
     ### DEFINE TYPE, DIFFICULTY AND SYMMETRY HERE
     ## Classic, AntiKnight, Windoku, Nonconsecutive, Center
     sudoku_type = SudokuType.Classic
     ssolver = SudokuSolver(sudoku_type)
     difficulty = Difficulty.MEDIUM
     symmetry = None  # "diagonal", "horizontal", "vertical", None
+    '''
 
     sudoku = Sudoku()
     ### set a random field of a sudoku to a random value
